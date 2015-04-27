@@ -6,9 +6,12 @@ var Body = React.createClass({
     return (
       <div className="row">
         <ArtistsList
-         artists={this.props.artists}
+          artists={this.props.artists}
+          setSelectedArtist={this.props.setSelectedArtist}
         />
-        <InfoDisplay />
+        <ArtistDisplay
+          selectedArtist={this.props.selectedArtist}
+        />
         <Upcoming />
       </div>
     );

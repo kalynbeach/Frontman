@@ -9,8 +9,17 @@ var ArtistsList = React.createClass({
   },
 
   render: function() {
+    var _setSelectedArtist = this.props.setSelectedArtist;
+
     var artistElementsArray = this.props.artists.map(function(artist) {
-      return (<ArtistButton key={artist.id} name={artist.data.displayName} /> );
+      return (
+        <ArtistButton
+          key={artist.id}
+          name={artist.data.displayName}
+          artist={artist}
+          setSelectedArtist={_setSelectedArtist}
+        />
+      );
     });
 
     return (

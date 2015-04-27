@@ -9,11 +9,11 @@ var Header = React.createClass({
           <h1>Frontman</h1>
         </div>
         <div className="col-sm-3">
-          <button type="button" onClick={this.props.logState}> Log Artists </button>
+          <button type="button" onClick={this.props.logState}> Log State </button>
         </div>
         <div className="col-sm-5">
           <ArtistForm
-            handleArtistInput={this.props.handleArtistInput}
+            createArtist={this.props.createArtist}
           />
         </div>
       </div>

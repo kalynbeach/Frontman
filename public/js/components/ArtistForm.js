@@ -29,7 +29,7 @@ var ArtistForm = React.createClass({
   //
   handleSubmit: function(event) {
     event.preventDefault();
-    this.props.handleArtistInput(this.state.name);
+    this.props.createArtist(this.state.name);
     this.setState({
       name: ''
     });

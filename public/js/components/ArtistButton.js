@@ -4,6 +4,10 @@ var ArtistButton = React.createClass({
 
   handleClick: function(e) {
     e.preventDefault();
+    this.props.setSelectedArtist(this.props.artist);
+
+    // TESTING
+    console.log("Artist " + this.props.name + " clicked.");
   },
 
   render: function() {

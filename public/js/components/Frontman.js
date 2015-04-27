@@ -4,7 +4,8 @@ var Frontman = React.createClass({
 
   getInitialState: function() {
     return {
-      artists: []
+      artists: [],
+      selectedArtist: undefined
     };
   },
 
@@ -13,30 +14,15 @@ var Frontman = React.createClass({
   },
 
   //
-  //
-  //
-  createArtist: function(name) {
-    var Artist = function(name) {
-      this.name = name;
-      this.id = undefined;
-      this.data;
-      this.calendar;
-    }
-
-    return Artist;
-  },
-
-  //
   // Create new Artist object from input form
   //
-  handleArtistInput: function(name) {
+  createArtist: function(name) {
+
     // Remove all spaces from the input string
     var filteredName = name.replace(/\s+/g, '');
+
     // Create a new Artist object from the filtered name string
     var newArtist = new Artist(filteredName);
-
-    var artistDataPromise = newArtist.gatherArtistData();
-    var calendarDataPromise = newArtist.gatherCalendar();
 
     var setArtistData = function(artist, data) {
       artist.data = data;
@@ -49,8 +35,13 @@ var Frontman = React.createClass({
       console.log("Calendar data gathered and set. ");
     };
 
+    // Gather the artist data and calendar data promise objects
+    var artistDataPromise = newArtist.gatherArtistData();
+    var calendarDataPromise = newArtist.gatherCalendar();
+
     var self = this;
 
+    // Set the respective data when the AJAX requests are done
     $.when(artistDataPromise, calendarDataPromise).done(function(artistPromise, calendarPromise) {
       var artistPromiseData = artistPromise[0];
       var calendarPromiseData = calendarPromise[0];
@@ -61,19 +52,12 @@ var Frontman = React.createClass({
       setArtistData(newArtist, filteredArtistData);
       setCalendarData(newArtist, filteredCalendarData);
 
+      // Set this.state.artists to include the new Artist
       self.addArtist(newArtist);
     });
 
     // TESTING
     console.log(newArtist);
-  },
-
-  //
-  // Get Artist's data from AJAX request methods to Songkick API
-  //
-  gatherAllArtistData: function(artist) {
-    artist.gatherArtistData();
-    artist.gatherCalendar();
   },
 
   //
@@ -93,21 +77,33 @@ var Frontman = React.createClass({
   },
 
   //
+  // Set this.state.selectedArtist's value to the argued Artist
+  //
+  setSelectedArtist: function(artist) {
+    this.setState({
+      selectedArtist: artist
+    });
+  },
+
+  //
   // TESTING: console.log current state
   //
   logState: function() {
-    console.log(this.state.artists);
+    console.log("Artists: ", this.state.artists);
+    console.log("Selected Artist: ", this.state.selectedArtist);
   },
 
   render: function() {
     return (
       <div className="col-sm-12">
         <Header
-          handleArtistInput={this.handleArtistInput}
+          createArtist={this.createArtist}
           logState={this.logState}
         />
         <Body
           artists={this.state.artists}
+          selectedArtist={this.state.selectedArtist}
+          setSelectedArtist={this.setSelectedArtist}
         />
       </div>
     );
