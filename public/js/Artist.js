@@ -42,6 +42,9 @@ Artist.prototype.gatherArtistData = function() {
   // Create the AJAX request promise object
   var promise = this.createPromise(url);
 
+  return promise;
+
+  /*
   // Set the Artist's data to the argued data
   var setArtistData = function(data) {
     this.data = data;
@@ -60,6 +63,7 @@ Artist.prototype.gatherArtistData = function() {
 
   // Run method operations
   getArtistDataFromPromise();
+  */
 };
 
 //
@@ -70,6 +74,9 @@ Artist.prototype.gatherCalendar = function() {
 
   var promise = this.createPromise(url);
 
+  return promise;
+
+  /*
   // Set the Artist's calendar data to the argued data
   var setCalendarData = function(data) {
     this.calendar = data;
@@ -86,7 +93,7 @@ Artist.prototype.gatherCalendar = function() {
 
   // Run method operations
   getCalendarDataFromPromise();
-  
+  */
 };
 
 //

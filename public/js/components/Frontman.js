@@ -13,6 +13,20 @@ var Frontman = React.createClass({
   },
 
   //
+  //
+  //
+  createArtist: function(name) {
+    var Artist = function(name) {
+      this.name = name;
+      this.id = undefined;
+      this.data;
+      this.calendar;
+    }
+
+    return Artist;
+  },
+
+  //
   // Create new Artist object from input form
   //
   handleArtistInput: function(name) {
@@ -21,9 +35,34 @@ var Frontman = React.createClass({
     // Create a new Artist object from the filtered name string
     var newArtist = new Artist(filteredName);
 
-    this.gatherAllArtistData(newArtist);
+    var artistDataPromise = newArtist.gatherArtistData();
+    var calendarDataPromise = newArtist.gatherCalendar();
 
-    this.addArtist(newArtist);
+    var setArtistData = function(artist, data) {
+      artist.data = data;
+      artist.id = data["id"];
+      console.log("Artist data gathered and set. ");
+    };
+
+    var setCalendarData = function(artist, data) {
+      artist.calendar = data;
+      console.log("Calendar data gathered and set. ");
+    };
+
+    var self = this;
+
+    $.when(artistDataPromise, calendarDataPromise).done(function(artistPromise, calendarPromise) {
+      var artistPromiseData = artistPromise[0];
+      var calendarPromiseData = calendarPromise[0];
+
+      var filteredArtistData = artistPromiseData["resultsPage"]["results"]["artist"][0];
+      var filteredCalendarData = calendarPromiseData;
+
+      setArtistData(newArtist, filteredArtistData);
+      setCalendarData(newArtist, filteredCalendarData);
+
+      self.addArtist(newArtist);
+    });
 
     // TESTING
     console.log(newArtist);
