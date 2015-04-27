@@ -5,8 +5,8 @@
 
 var Artist = function(name) {
   this.name = name;
-  this.data;
   this.id = undefined;
+  this.data;
   this.calendar;
 };
 
@@ -70,8 +70,6 @@ Artist.prototype.gatherCalendar = function() {
 
   var promise = this.createPromise(url);
 
-  var calendarData;
-
   // Set the Artist's calendar data to the argued data
   var setCalendarData = function(data) {
     this.calendar = data;
@@ -81,7 +79,7 @@ Artist.prototype.gatherCalendar = function() {
   // Get the artist calendar data JSON object from the promise object
   function getCalendarDataFromPromise() {
     promise.done(function(data) {
-      calendarData = data["resultsPage"]["results"]["event"];
+      var calendarData = data["resultsPage"]["results"]["event"];
       setCalendarData(calendarData);
     });
   };
@@ -91,6 +89,9 @@ Artist.prototype.gatherCalendar = function() {
   
 };
 
+//
+// Log an Artist's calendar data
+//
 Artist.prototype.logCalendar = function() {
   if (this.calendar === undefined) {
     console.log("Calendar for this artist has not yet been gathered. ");

@@ -44,6 +44,7 @@ var ArtistForm = React.createClass({
             className="form-control"
             id="artist-form-input"
             placeholder="Enter an artist or band to track..."
+            value={this.state.name}
             onChange={this.handleChange}
             />
         </div>

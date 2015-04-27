@@ -8,13 +8,17 @@ var Frontman = React.createClass({
     };
   },
 
+  componentWillUpdate: function() {
+
+  },
+
   //
   // Create new Artist object from input form
   //
   handleArtistInput: function(name) {
     // Remove all spaces from the input string
     var filteredName = name.replace(/\s+/g, '');
-    // Create a new Artist object from the name string
+    // Create a new Artist object from the filtered name string
     var newArtist = new Artist(filteredName);
 
     this.gatherAllArtistData(newArtist);
@@ -34,16 +38,11 @@ var Frontman = React.createClass({
   },
 
   //
-  // Add Artist to user's Artist db
+  // Add Artist to Frontman component state
   //
   addArtist: function(artist) {
-    var oldArtistsArray = this.state.artists;
-    oldArtistsArray.push(artist);
-    var newArtistsArray = oldArtistsArray;
-
-    // Add Artist to artists array in state
     this.setState({
-      artists: newArtistsArray
+      artists: this.state.artists.concat(artist)
     });
   },
 
@@ -76,4 +75,9 @@ var Frontman = React.createClass({
   }
 });
 
-React.render(<Frontman artist={Artist} artistData={ARTISTS} />, document.getElementById('app-wrapper'));
+React.render(<Frontman
+  artist={Artist}
+  artistData={ARTISTS}
+  />, 
+  document.getElementById('app-wrapper')
+);
