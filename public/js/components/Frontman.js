@@ -55,7 +55,7 @@ var Frontman = React.createClass({
       // Gather the calendar data from 
       $.when(calendarDataPromise).done(function(calendarData) {
        // var calendarPromiseData = calendarPromise[0];
-        var filteredCalendarData = calendarData["resultsPage"]["results"];
+        var filteredCalendarData = calendarData["resultsPage"]["results"]["event"];
         console.log(calendarData);
 
         setCalendarData(newArtist, filteredCalendarData);

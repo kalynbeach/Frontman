@@ -12,11 +12,11 @@ var ArtistButton = React.createClass({
 
   render: function() {
     return (
-      <div className="artist-list-button" onClick={this.handleClick}>
+      <li className="artist-list-button" onClick={this.handleClick}>
         <div className="artist-list-button-name">
           {this.props.name}
         </div>
-      </div>
+      </li>
     );
   }
 

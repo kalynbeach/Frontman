@@ -8,16 +8,15 @@ var ArtistDisplay = React.createClass({
     };
   },
 
-  componentWillReceiveProps: function() {
-  
-  },
-
   //
   // TODO: Clean up this render method so that nothing is repeated
   //
   render: function() {
+
+    var selectedArtist = this.props.selectedArtist; 
+
     // Place holder view if there is no selected Artist
-    if (this.props.selectedArtist === undefined) {
+    if (selectedArtist === undefined) {
       return (
         <div className="col-sm-6">
           <div className="body-section" id="artist-display">
@@ -27,12 +26,25 @@ var ArtistDisplay = React.createClass({
       );
     } else {
 
-      var selectedArtist = this.props.selectedArtist;
+      var eventListElements = selectedArtist.calendar.map(function(event) {
+        return (
+          <Event
+            title={event.displayName}
+            location={event.location}
+
+          />
+        );
+      });
 
       return (
         <div className="col-sm-6">
           <div className="body-section" id="artist-display">
             <h2 id="artist-display-name"> {selectedArtist.data.displayName} </h2>
+            <div id="artist-display-calendar-list">
+              <ul>
+                {eventListElements}
+              </ul>
+            </div>
           </div>
         </div>
       );  
