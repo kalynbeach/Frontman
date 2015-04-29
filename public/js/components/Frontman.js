@@ -18,6 +18,8 @@ var Frontman = React.createClass({
   //
   createArtist: function(name) {
 
+    var self = this;
+
     // Remove all spaces from the input string
     var filteredName = name.replace(/\s+/g, '');
 
@@ -36,25 +38,32 @@ var Frontman = React.createClass({
       console.log("Calendar data gathered and set. ");
     };
 
-    // Gather the artist data and calendar data promise objects
+    // Gather the artist data promise object
     var artistDataPromise = newArtist.gatherArtistData();
-    var calendarDataPromise = newArtist.gatherCalendar();
-
-    var self = this;
 
     // Set the respective data when the AJAX requests are done
-    $.when(artistDataPromise, calendarDataPromise).done(function(artistPromise, calendarPromise) {
-      var artistPromiseData = artistPromise[0];
-      var calendarPromiseData = calendarPromise[0];
+    $.when(artistDataPromise).done(function(artistData) {
+      // Filter out the data we want from the JSON response
+      var filteredArtistData = artistData["resultsPage"]["results"]["artist"][0];
 
-      var filteredArtistData = artistPromiseData["resultsPage"]["results"]["artist"][0];
-      var filteredCalendarData = calendarPromiseData["resultsPage"]["results"];
-
+      // Set the Artist data so that the id can be used to request the calendar API
       setArtistData(newArtist, filteredArtistData);
-      setCalendarData(newArtist, filteredCalendarData);
 
-      // Set this.state.artists to include the new Artist
-      self.addArtist(newArtist);
+      // Get the calendar promise object
+      var calendarDataPromise = newArtist.gatherCalendar();
+
+      // Gather the calendar data from 
+      $.when(calendarDataPromise).done(function(calendarData) {
+       // var calendarPromiseData = calendarPromise[0];
+        var filteredCalendarData = calendarData["resultsPage"]["results"];
+        console.log(calendarData);
+
+        setCalendarData(newArtist, filteredCalendarData);
+
+        // Set this.state.artists to include the new Artist
+        self.addArtist(newArtist);
+      });
+
     });
 
     // TESTING
