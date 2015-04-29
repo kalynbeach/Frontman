@@ -44,26 +44,6 @@ Artist.prototype.gatherArtistData = function() {
 
   return promise;
 
-  /*
-  // Set the Artist's data to the argued data
-  var setArtistData = function(data) {
-    this.data = data;
-    this.id = data["id"];
-    console.log("Artist data gathered and set. ");
-  }.bind(this);
-
-  // Get the artist data JSON object from the promise object
-  function getArtistDataFromPromise() {
-    promise.done(function(data) {
-      var artistData = data["resultsPage"]["results"]["artist"][0];
-      // Set the artist data
-      setArtistData(artistData);
-    });
-  };
-
-  // Run method operations
-  getArtistDataFromPromise();
-  */
 };
 
 //
@@ -76,24 +56,6 @@ Artist.prototype.gatherCalendar = function() {
 
   return promise;
 
-  /*
-  // Set the Artist's calendar data to the argued data
-  var setCalendarData = function(data) {
-    this.calendar = data;
-    console.log("Calendar data gathered and set. ");
-  }.bind(this);
-
-  // Get the artist calendar data JSON object from the promise object
-  function getCalendarDataFromPromise() {
-    promise.done(function(data) {
-      var calendarData = data["resultsPage"]["results"]["event"];
-      setCalendarData(calendarData);
-    });
-  };
-
-  // Run method operations
-  getCalendarDataFromPromise();
-  */
 };
 
 //

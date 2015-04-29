@@ -48,7 +48,7 @@ var Frontman = React.createClass({
       var calendarPromiseData = calendarPromise[0];
 
       var filteredArtistData = artistPromiseData["resultsPage"]["results"]["artist"][0];
-      var filteredCalendarData = calendarPromiseData;
+      var filteredCalendarData = calendarPromiseData["resultsPage"]["results"];
 
       setArtistData(newArtist, filteredArtistData);
       setCalendarData(newArtist, filteredCalendarData);
