@@ -11,6 +11,7 @@ var ArtistsList = React.createClass({
   render: function() {
     var _setSelectedArtist = this.props.setSelectedArtist;
 
+    // Map the artists to Artist Button components
     var artistElementsArray = this.props.artists.map(function(artist) {
       return (
         <ArtistButton
@@ -24,7 +25,7 @@ var ArtistsList = React.createClass({
 
     return (
       <div className="col-sm-3">
-        <div className="artists-list">
+        <div className="body-section" id="artists-list">
           <ul className="artists-list-element">
             {artistElementsArray}
           </ul>

@@ -27,6 +27,7 @@ var Frontman = React.createClass({
     var setArtistData = function(artist, data) {
       artist.data = data;
       artist.id = data["id"];
+      artist.name = data["displayName"];
       console.log("Artist data gathered and set. ");
     };
 

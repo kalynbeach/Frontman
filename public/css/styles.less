@@ -4,16 +4,31 @@
 
 // === Colors ===
 @lightGray: #EEEEEE;
+@skyBlue: #BDE8EA;
 
 @sectionBackgroundColor: @lightGray;
+@artistListButtonColor: @skyBlue;
 
 // === Elements ===
 @bodyHeight: 700px;
+
+// === Fonts ===
+@Railway: 'Raleway', sans-serif;
+
 
 
 // ====================
 //    Common Styles
 // ====================
+
+body {
+  font-family: @Railway;
+}
+
+// Main app body
+.body-section {
+  padding: 5px;
+}
 
 // ====================
 //      Sections
@@ -31,21 +46,46 @@
 
 // === Body ===
 
-.artists-list {
+#artists-list {
   height: @bodyHeight;
   background-color: @sectionBackgroundColor;
 
   .artists-list-element {
     margin: 0px;
+    padding: 0px;
+
+    .artist-list-button {
+      height: @bodyHeight / 20;
+      margin-bottom: 5px;
+      font-size: 20px;
+      text-align: center;
+      background-color: @artistListButtonColor;
+
+      .artist-list-button-name {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+    }
   }
 }
 
-.artist-display {
+#artist-display {
   height: @bodyHeight;
   background-color: @sectionBackgroundColor;
+  
+  // h2
+  #artist-display-name {
+    margin: 0px;
+  }
 }
 
-.upcoming {
+#upcoming {
   height: @bodyHeight;
   background-color: @sectionBackgroundColor;
+  
+  // h2
+  #upcoming-title {
+    margin: 0px;
+  }
 }
