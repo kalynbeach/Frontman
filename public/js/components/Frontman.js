@@ -19,6 +19,7 @@ var Frontman = React.createClass({
   createArtist: function(name) {
 
     var self = this;
+    var INVALID_ARTIST = "No Artist with inputted name found in Songkick database. ";
 
     // Remove all spaces from the input string
     var filteredName = name.replace(/\s+/g, '');
@@ -43,6 +44,16 @@ var Frontman = React.createClass({
 
     // Set the respective data when the AJAX requests are done
     $.when(artistDataPromise).done(function(artistData) {
+      
+      // Boolean of whether the input returns a valid artist: 1 = valid, 0 = invalid
+      var validArtist = self.validateArtist(artistData);
+
+      // If Artist doesn't exist, return
+      if (validArtist === 0) {
+        console.log(INVALID_ARTIST);
+        return;
+      };
+
       // Filter out the data we want from the JSON response
       var filteredArtistData = artistData["resultsPage"]["results"]["artist"][0];
 
@@ -56,7 +67,6 @@ var Frontman = React.createClass({
       $.when(calendarDataPromise).done(function(calendarData) {
        // var calendarPromiseData = calendarPromise[0];
         var filteredCalendarData = calendarData["resultsPage"]["results"]["event"];
-        console.log(calendarData);
 
         setCalendarData(newArtist, filteredCalendarData);
 
@@ -65,9 +75,6 @@ var Frontman = React.createClass({
       });
 
     });
-
-    // TESTING
-    console.log(newArtist);
   },
 
   //
@@ -93,6 +100,19 @@ var Frontman = React.createClass({
     this.setState({
       selectedArtist: artist
     });
+  },
+
+  //
+  //
+  //
+  validateArtist: function(responseData) {
+    var totalEntries = responseData["resultsPage"]["totalEntries"];
+
+    if (totalEntries === 0) {
+      return 0;
+    } else if (totalEntries >= 1) {
+      return 1;
+    }
   },
 
   //
