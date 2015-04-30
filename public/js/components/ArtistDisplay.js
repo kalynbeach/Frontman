@@ -18,7 +18,7 @@ var ArtistDisplay = React.createClass({
     // Place holder view if there is no selected Artist
     if (selectedArtist === undefined) {
       return (
-        <div className="col-sm-6">
+        <div className="col-sm-6 body-col">
           <div className="body-section" id="artist-display">
             <h2 id="artist-display-name"> Select an Artist </h2>
           </div>
@@ -37,11 +37,11 @@ var ArtistDisplay = React.createClass({
       });
 
       return (
-        <div className="col-sm-6">
+        <div className="col-sm-6 body-col">
           <div className="body-section" id="artist-display">
             <h2 id="artist-display-name"> {selectedArtist.data.displayName} </h2>
             <div id="artist-display-calendar-list">
-              <ul>
+              <ul className="artist-display-calendar-list-element">
                 {eventListElements}
               </ul>
             </div>

@@ -24,7 +24,7 @@ var ArtistsList = React.createClass({
     });
 
     return (
-      <div className="col-sm-3">
+      <div className="col-sm-3 body-col">
         <div className="body-section" id="artists-list">
           <ul className="artists-list-element">
             {artistElementsArray}
