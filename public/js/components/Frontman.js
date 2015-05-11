@@ -103,7 +103,7 @@ var Frontman = React.createClass({
   },
 
   //
-  //
+  // Make sure the input will return a valid Artist from the AJAX call
   //
   validateArtist: function(responseData) {
     var totalEntries = responseData["resultsPage"]["totalEntries"];

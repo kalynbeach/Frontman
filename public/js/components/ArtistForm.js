@@ -48,7 +48,7 @@ var ArtistForm = React.createClass({
             onChange={this.handleChange}
             />
         </div>
-        <button type="submit" classname="btn btn-default">Add</button>
+        <button id="artist-form-button" type="submit" classname="btn btn-default">Add</button>
       </form>
     );
   }
